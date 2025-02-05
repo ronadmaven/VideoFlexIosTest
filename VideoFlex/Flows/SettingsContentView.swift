@@ -10,12 +10,19 @@ import SDK
 import StoreKit
 import SwiftUI
 /// Main settings flow for the app
+
+enum SettingsSheet: String, Identifiable {
+    case terms, privacy
+    var id: String { rawValue }
+}
+
 struct SettingsContentView: View {
     @EnvironmentObject private var manager: DataManager
     @EnvironmentObject private var sdk: TheSDK
     @Environment(\.isSubscribed) private var isSubscribed: Bool
 
     @Binding var show: Bool
+    @State var sheet: SettingsSheet?
 
     // MARK: - Main rendering function
 
@@ -46,6 +53,14 @@ struct SettingsContentView: View {
                     .fill(Color.deepBlueColor)
             )
             .padding()
+            .sheet(item: $sheet) { item in
+                switch item {
+                case .privacy:
+                    WebView(url: Config.settingsPrivacyURL)
+                case .terms:
+                    WebView(url: Config.settingsTermsURL)
+                }
+            }
         }
     }
 
@@ -175,10 +190,10 @@ struct SettingsContentView: View {
             Color.extraDarkGrayColor.frame(height: 1).opacity(0.8).padding(.horizontal)
 
             SettingsItem(title: "Privacy Policy", icon: "hand.raised") {
-                UIApplication.shared.open(AppConfig.privacyURL, options: [:], completionHandler: nil)
+                sheet = .privacy
             }
             SettingsItem(title: "terms and conditions".capitalized, icon: "document") {
-                UIApplication.shared.open(AppConfig.privacyURL, options: [:], completionHandler: nil)
+                sheet = .terms
             }
         }.padding([.top, .bottom], 5)
     }
@@ -206,8 +221,11 @@ class EmailPresenter: NSObject, MFMailComposeViewControllerDelegate {
             presentAlert(title: "Email Client", message: "Your device must have the native iOS email app installed for this feature.")
             return
         }
+
         let picker = MFMailComposeViewController()
-        picker.setToRecipients([AppConfig.emailSupport])
+        picker.setSubject(Config.settingsMailSubject)
+        picker.setMessageBody(Config.settingsMailbody, isHTML: false)
+        picker.setToRecipients([Config.settingsMailRecepient])
         picker.mailComposeDelegate = self
         rootController?.present(picker, animated: true, completion: nil)
     }
