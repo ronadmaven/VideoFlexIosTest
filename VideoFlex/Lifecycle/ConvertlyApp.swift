@@ -5,6 +5,7 @@
 //  Created by Booysenberry on 10/7/22.
 //
 
+import CommonSwiftUI
 import SDK
 import SwiftUI
 @main
@@ -12,22 +13,46 @@ struct VideoFlexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     @StateObject private var manager: DataManager = DataManager()
-
+    @State private var showDashboard: Bool = false
     @State var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
                                                  appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
                                                  logOptions: .js,
                                                  manageNotifications: true))
 
+    @State var launchScreen: AnyView?
+
     // MARK: - Main rendering function
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                DashboardContentView()
+            NavigationView {
+                VStack {
+                    if let launchScreen {
+                        launchScreen
+                    } else {
+                        Color.clear
+                    }
+
+                    NavigationLink(
+                        destination: DashboardContentView(),
+                        isActive: $showDashboard
+                    ) {
+                        EmptyView()
+                    }
+                }
             }
             .environment(\.isSubscribed, sdk.isSubsccribed)
             .environmentObject(sdk)
             .environmentObject(manager)
+            .onFirstAppear {
+                if wasLaunchedFromNotification {
+                    launchScreen = AnyView(DashboardContentView())
+                } else {
+                    launchScreen = AnyView(SplashScreen(show: .init(get: { true }, set: { _ in
+                        showDashboard = true
+                    })))
+                }
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Booysenberry on 10/8/22.
 //
 
+import CommonSwiftUI
 import MessageUI
 import SDK
 import StoreKit
@@ -23,6 +24,7 @@ struct SettingsContentView: View {
 
     @Binding var show: Bool
     @State var sheet: SettingsSheet?
+    @State var showRateUs: Bool = false
 
     // MARK: - Main rendering function
 
@@ -52,6 +54,7 @@ struct SettingsContentView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.deepBlueColor)
             )
+
             .padding()
             .sheet(item: $sheet) { item in
                 switch item {
@@ -59,6 +62,11 @@ struct SettingsContentView: View {
                     WebView(url: Config.settingsPrivacyURL)
                 case .terms:
                     WebView(url: Config.settingsTermsURL)
+                }
+            }
+            .overlay {
+                if showRateUs {
+                    RateusAlert(show: $showRateUs, imageName: "rateusIcon") { _ in }
                 }
             }
         }
@@ -165,6 +173,7 @@ struct SettingsContentView: View {
     private var RatingShareView: some View {
         VStack {
             SettingsItem(title: "Rate App", icon: "star") {
+                showRateUs = true
 //                if let scene = UIApplication.shared.windows.first?.windowScene {
 //                    SKStoreReviewController.requestReview(in: scene)
 //                }

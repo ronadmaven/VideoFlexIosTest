@@ -41,6 +41,7 @@ struct DashboardContentView: View {
             LoadingView(isLoading: $manager.showLoadingView)
                 .background(FilePreview($manager.showFilePreview, url: manager.selectedFileURL))
         }
+        .navigationBarHidden(true)
         .onChange(of: manager.fullScreenMode) { newValue in
             switch newValue {
             case .premium:
