@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		734065282D538F2200A69488 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065272D538F2200A69488 /* WebView.swift */; };
+		734065292D538F2200A69488 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065252D538F2200A69488 /* MailView.swift */; };
+		734065302D53900300A69488 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7340652F2D53900300A69488 /* CommonSwiftUI */; };
+		734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 734065322D53902B00A69488 /* CommonSwiftUI */; };
+		734065362D53907E00A69488 /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 734065352D53907E00A69488 /* SDK */; };
+		73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED582D5364D500394E4B /* SceneDelegate.swift */; };
+		73E6ED5C2D53660E00394E4B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED5B2D53660E00394E4B /* Config.swift */; };
+		73E6ED622D5367F300394E4B /* IsSubscribedEnvKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */; };
 		792A6FC328F0F4F500CC8D74 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792A6FC228F0F4F500CC8D74 /* Launch.storyboard */; };
 		792A6FC628F0F52000CC8D74 /* PurchaseKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792A6FC428F0F51C00CC8D74 /* PurchaseKit.xcframework */; };
 		792A6FC728F0F52000CC8D74 /* PurchaseKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 792A6FC428F0F51C00CC8D74 /* PurchaseKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -14,7 +22,6 @@
 		792A6FCC28F0F84900CC8D74 /* PremiumContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FCB28F0F84900CC8D74 /* PremiumContentView.swift */; };
 		792A6FCF28F0F86D00CC8D74 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FCE28F0F86D00CC8D74 /* AppConfig.swift */; };
 		792A6FD128F0F8D100CC8D74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FD028F0F8D100CC8D74 /* AppDelegate.swift */; };
-		792A6FD428F0F91500CC8D74 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 792A6FD328F0F91500CC8D74 /* GoogleMobileAds */; };
 		792A6FD728F0F96900CC8D74 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FD628F0F96900CC8D74 /* DataManager.swift */; };
 		792A6FD928F1B68D00CC8D74 /* Video+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FD828F1B68D00CC8D74 /* Video+Merge.swift */; };
 		792A6FDB28F1B6A100CC8D74 /* Video+Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792A6FDA28F1B6A100CC8D74 /* Video+Sound.swift */; };
@@ -49,6 +56,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		734065252D538F2200A69488 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		734065272D538F2200A69488 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		73E6ED582D5364D500394E4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		73E6ED5A2D53657500394E4B /* VideoFlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VideoFlex.entitlements; sourceTree = "<group>"; };
+		73E6ED5B2D53660E00394E4B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsSubscribedEnvKey.swift; sourceTree = "<group>"; };
 		792A6FC128F0F4CD00CC8D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		792A6FC228F0F4F500CC8D74 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		792A6FC428F0F51C00CC8D74 /* PurchaseKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PurchaseKit.xcframework; sourceTree = "<group>"; };
@@ -81,14 +94,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				792A6FD428F0F91500CC8D74 /* GoogleMobileAds in Frameworks */,
 				792A6FC628F0F52000CC8D74 /* PurchaseKit.xcframework in Frameworks */,
+				734065362D53907E00A69488 /* SDK in Frameworks */,
+				734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */,
+				734065302D53900300A69488 /* CommonSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		734065242D538ED400A69488 /* RateUs */ = {
+			isa = PBXGroup;
+			children = (
+				734065252D538F2200A69488 /* MailView.swift */,
+				734065272D538F2200A69488 /* WebView.swift */,
+			);
+			path = RateUs;
+			sourceTree = "<group>";
+		};
+		73E6ED602D5367D700394E4B /* EnvKeys */ = {
+			isa = PBXGroup;
+			children = (
+				73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */,
+			);
+			path = EnvKeys;
+			sourceTree = "<group>";
+		};
 		792A6FCD28F0F85A00CC8D74 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +159,7 @@
 		794FCADE28F0F3F800873961 /* VideoFlex */ = {
 			isa = PBXGroup;
 			children = (
+				73E6ED5A2D53657500394E4B /* VideoFlex.entitlements */,
 				FA124EFD2AFAFDBE00A42AC3 /* SubView */,
 				FA124EFA2AFAFA0500A42AC3 /* Helper */,
 				FA124EF32AFAF27600A42AC3 /* Fonts */,
@@ -155,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				792A6FD028F0F8D100CC8D74 /* AppDelegate.swift */,
+				73E6ED582D5364D500394E4B /* SceneDelegate.swift */,
 				794FCADF28F0F3F800873961 /* ConvertlyApp.swift */,
 			);
 			path = Lifecycle;
@@ -163,6 +197,7 @@
 		794FCAEE28F0F41700873961 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				734065242D538ED400A69488 /* RateUs */,
 				794FCAEF28F0F42900873961 /* DashboardContentView.swift */,
 				792A6FC928F0F83300CC8D74 /* GalleryAssetPickerView.swift */,
 				792A6FCB28F0F84900CC8D74 /* PremiumContentView.swift */,
@@ -185,7 +220,9 @@
 		FA124EFA2AFAFA0500A42AC3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				73E6ED602D5367D700394E4B /* EnvKeys */,
 				FA124EFB2AFAFA1E00A42AC3 /* Extensions.swift */,
+				73E6ED5B2D53660E00394E4B /* Config.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -218,7 +255,9 @@
 			);
 			name = VideoFlex;
 			packageProductDependencies = (
-				792A6FD328F0F91500CC8D74 /* GoogleMobileAds */,
+				7340652F2D53900300A69488 /* CommonSwiftUI */,
+				734065322D53902B00A69488 /* CommonSwiftUI */,
+				734065352D53907E00A69488 /* SDK */,
 			);
 			productName = Convertly;
 			productReference = 794FCADC28F0F3F800873961 /* VideoFlex.app */;
@@ -249,7 +288,8 @@
 			);
 			mainGroup = 794FCAD328F0F3F800873961;
 			packageReferences = (
-				792A6FD228F0F91500CC8D74 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				734065312D53902B00A69488 /* XCLocalSwiftPackageReference "../../CommonSwiftUI" */,
+				734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */,
 			);
 			productRefGroup = 794FCADD28F0F3F800873961 /* Products */;
 			projectDirPath = "";
@@ -283,14 +323,19 @@
 				792A6FDB28F1B6A100CC8D74 /* Video+Sound.swift in Sources */,
 				792A6FD128F0F8D100CC8D74 /* AppDelegate.swift in Sources */,
 				FA124F032AFB056B00A42AC3 /* BorderedRectangle.swift in Sources */,
+				73E6ED622D5367F300394E4B /* IsSubscribedEnvKey.swift in Sources */,
 				FA124F012AFB024000A42AC3 /* NoBorderRectangle.swift in Sources */,
+				73E6ED5C2D53660E00394E4B /* Config.swift in Sources */,
 				FA124EF92AFAF2E200A42AC3 /* Fonts.swift in Sources */,
 				792A6FCC28F0F84900CC8D74 /* PremiumContentView.swift in Sources */,
 				792A6FE128F1B76200CC8D74 /* SettingsContentView.swift in Sources */,
 				792A6FCF28F0F86D00CC8D74 /* AppConfig.swift in Sources */,
 				792A6FD728F0F96900CC8D74 /* DataManager.swift in Sources */,
 				FA124EFF2AFAFDD800A42AC3 /* BgCircleView.swift in Sources */,
+				734065282D538F2200A69488 /* WebView.swift in Sources */,
+				734065292D538F2200A69488 /* MailView.swift in Sources */,
 				794FCAE028F0F3F800873961 /* ConvertlyApp.swift in Sources */,
+				73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */,
 				792A6FCA28F0F83300CC8D74 /* GalleryAssetPickerView.swift in Sources */,
 				792A6FD928F1B68D00CC8D74 /* Video+Merge.swift in Sources */,
 				792A6FDF28F1B6CA00CC8D74 /* BottomSheetView.swift in Sources */,
@@ -422,10 +467,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
-				DEVELOPMENT_TEAM = 6CDSMS49SQ;
+				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoFlex/Info.plist;
@@ -438,7 +484,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,10 +506,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
-				DEVELOPMENT_TEAM = 6CDSMS49SQ;
+				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoFlex/Info.plist;
@@ -476,7 +523,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,22 +563,37 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		734065312D53902B00A69488 /* XCLocalSwiftPackageReference "../../CommonSwiftUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../CommonSwiftUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		792A6FD228F0F91500CC8D74 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				branch = Legacy;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		792A6FD328F0F91500CC8D74 /* GoogleMobileAds */ = {
+		7340652F2D53900300A69488 /* CommonSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 792A6FD228F0F91500CC8D74 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
+			productName = CommonSwiftUI;
+		};
+		734065322D53902B00A69488 /* CommonSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonSwiftUI;
+		};
+		734065352D53907E00A69488 /* SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */;
+			productName = SDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

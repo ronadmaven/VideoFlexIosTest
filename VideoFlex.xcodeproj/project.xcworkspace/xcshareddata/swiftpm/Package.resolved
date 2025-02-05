@@ -1,59 +1,51 @@
 {
+  "originHash" : "c115ac04f10d68fbd46266d90e0ee383ed34a595856751cf2bd5f660ba9861d5",
   "pins" : [
     {
-      "identity" : "googleappmeasurement",
+      "identity" : "apps_sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleAppMeasurement.git",
+      "location" : "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk",
       "state" : {
-        "revision" : "c1cfde8067668027b23a42c29d11c246152fe046",
-        "version" : "9.6.0"
+        "branch" : "Legacy",
+        "revision" : "3ceb9c16fc8dbf1946141b01da313545d99c2f60"
       }
     },
     {
-      "identity" : "googleutilities",
+      "identity" : "appsflyer-apple-purchase-connector",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleUtilities.git",
+      "location" : "https://github.com/AppsFlyerSDK/appsflyer-apple-purchase-connector.git",
       "state" : {
-        "revision" : "68ea347bdb1a69e2d2ae2e25cd085b6ef92f64cb",
-        "version" : "7.9.0"
+        "revision" : "1c66e41dbb9b0f5a501859c6d282a90cf632ad34",
+        "version" : "6.15.2"
       }
     },
     {
-      "identity" : "nanopb",
+      "identity" : "appsflyerframework",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/nanopb.git",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework.git",
       "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
+        "revision" : "e248ac38ac97ab6926e500ace97e220d10df7d41",
+        "version" : "6.14.3"
       }
     },
     {
-      "identity" : "promises",
+      "identity" : "keychainaccess",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/promises.git",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
       "state" : {
-        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
-        "version" : "2.1.1"
+        "branch" : "master",
+        "revision" : "e0c7eebc5a4465a3c4680764f26b7a61f567cdaf"
       }
     },
     {
-      "identity" : "swift-package-manager-google-mobile-ads",
+      "identity" : "shipbooksdk-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
+      "location" : "https://github.com/ShipBook/ShipBookSDK-iOS.git",
       "state" : {
-        "revision" : "8ee37d38a965c54c36a33a169c49f3d293def2f6",
-        "version" : "9.11.0"
-      }
-    },
-    {
-      "identity" : "swift-package-manager-google-user-messaging-platform",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
-      "state" : {
-        "revision" : "3b924ce3313a5fd2fc6a8dc889a8c38f76890fe3",
-        "version" : "2.0.0"
+        "revision" : "8f75dd21e9a6d5a33d87a7037ca0be8adab84700",
+        "version" : "1.2.4"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -5,17 +5,16 @@
 //  Created by Booysenberry on 10/7/22.
 //
 
+import AVFoundation
 import AVKit
+import Foundation
+import ImageIO
+import MobileCoreServices
 import Photos
 import SwiftUI
-import ImageIO
-import Foundation
-import AVFoundation
-import MobileCoreServices
 
 /// Main data manager for the app
 class DataManager: NSObject, ObservableObject {
-    
     /// Dynamic properties that the UI will react to
     @Published var fullScreenMode: FullScreenMode?
     @Published var videoToolType: VideoToolType = .regular
@@ -30,12 +29,7 @@ class DataManager: NSObject, ObservableObject {
     @Published var showBottomSheet: Bool = false
     @Published var showFilePreview: Bool = false
     @Published var selectedFileURL: URL?
-    
-    /// Dynamic properties that the UI will react to AND store values in UserDefaults
-    @AppStorage(AppConfig.premiumVersion) var isPremiumUser: Bool = false {
-        didSet { Interstitial.shared.isPremiumUser = isPremiumUser }
-    }
-    
+
     /// Internal properties
     internal var mergeVideoAssets: [AVAsset] = [AVAsset]()
     internal var selectedVideoAsset: AVAsset?
@@ -48,8 +42,8 @@ class DataManager: NSObject, ObservableObject {
 }
 
 // MARK: - Handle selected video asset
+
 extension DataManager: UIDocumentPickerDelegate {
-    
     /// Handle selected asset from Photo gallery or Files app
     func handleSelectedAsset(_ videoAsset: AVAsset?) {
         guard let asset = videoAsset else {
@@ -69,17 +63,17 @@ extension DataManager: UIDocumentPickerDelegate {
             }
         }
     }
-    
+
     /// Document picker controller
     func documentViewController() -> UIDocumentPickerViewController {
         let controller = UIDocumentPickerViewController(forOpeningContentTypes: [
-            .movie, .mpeg4Movie, .mpeg4Movie, .quickTimeMovie, .appleProtectedMPEG4Video
+            .movie, .mpeg4Movie, .mpeg4Movie, .quickTimeMovie, .appleProtectedMPEG4Video,
         ])
         controller.allowsMultipleSelection = false
         controller.delegate = self
         return controller
     }
-    
+
     /// Handle selected image files from Files iOS app
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let fileURL = urls.first else { return }
@@ -90,7 +84,7 @@ extension DataManager: UIDocumentPickerDelegate {
         let path = documentsDirectoryPath.appending(fileURL.lastPathComponent)
         do {
             try Data(contentsOf: fileURL).write(to: URL(fileURLWithPath: path))
-            self.handleSelectedAsset(AVAsset(url: URL(fileURLWithPath: path)))
+            handleSelectedAsset(AVAsset(url: URL(fileURLWithPath: path)))
         } catch let error {
             presentAlert(title: "Oops!", message: error.localizedDescription)
         }
@@ -98,8 +92,8 @@ extension DataManager: UIDocumentPickerDelegate {
 }
 
 // MARK: - Manage converted files history
+
 extension DataManager {
-    
     /// Fetch converted files to audio and merged videos
     func fetchFilesHistory() {
         filesHistory.removeAll()
@@ -115,7 +109,7 @@ extension DataManager {
             self.filesHistory = files.sorted(by: { $0.lastPathComponent > $1.lastPathComponent })
         }
     }
-    
+
     /// Delete file for a given URL
     func deleteFile(atIndex index: Int) {
         do {
@@ -128,8 +122,8 @@ extension DataManager {
 }
 
 // MARK: - Play Selected video
+
 extension DataManager {
-    
     /// Play current video
     func playSelectedVideo() {
         guard let asset = selectedVideoAsset else { return }
@@ -143,8 +137,8 @@ extension DataManager {
 }
 
 // MARK: - Convert Selected video
+
 extension DataManager {
-    
     /// Convert/Merge selected asset(s)
     func convertSelectedAsset() {
         guard let asset = selectedVideoAsset else { return }

@@ -5,18 +5,29 @@
 //  Created by Booysenberry on 10/7/22.
 //
 
+import SDK
 import SwiftUI
-
 @main
 struct VideoFlexApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @StateObject private var manager: DataManager = DataManager()
-    
+
+    @State var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
+                                                 appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
+                                                 logOptions: .js,
+                                                 manageNotifications: true))
+
     // MARK: - Main rendering function
+
     var body: some Scene {
         WindowGroup {
-            DashboardContentView().environmentObject(manager)
+            Group {
+                DashboardContentView()
+            }
+            .environment(\.isSubscribed, sdk.isSubsccribed)
+            .environmentObject(sdk)
+            .environmentObject(manager)
         }
     }
 }
@@ -33,10 +44,10 @@ struct RoundedCorner: Shape {
 
 /// Show a loading indicator view
 struct LoadingView: View {
-    
     @Binding var isLoading: Bool
-    
+
     // MARK: - Main rendering function
+
     var body: some View {
         ZStack {
             if isLoading {
@@ -63,35 +74,35 @@ struct FilePreview: UIViewControllerRepresentable {
     private var isActive: Binding<Bool>
     private let viewController = UIViewController()
     private let documentController: UIDocumentInteractionController
-    
+
     init(_ isActive: Binding<Bool>, url: URL?) {
         self.isActive = isActive
-        self.documentController = UIDocumentInteractionController(url: url ?? URL(fileURLWithPath: ""))
+        documentController = UIDocumentInteractionController(url: url ?? URL(fileURLWithPath: ""))
     }
-    
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<FilePreview>) -> UIViewController {
         return viewController
     }
-    
+
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<FilePreview>) {
-        if self.isActive.wrappedValue && documentController.delegate == nil {
+        if isActive.wrappedValue && documentController.delegate == nil {
             documentController.delegate = context.coordinator
-            self.documentController.presentPreview(animated: true)
+            documentController.presentPreview(animated: true)
         }
     }
-    
+
     func makeCoordinator() -> Coordintor {
         return Coordintor(owner: self)
     }
-    
+
     final class Coordintor: NSObject, UIDocumentInteractionControllerDelegate {
         let owner: FilePreview
         init(owner: FilePreview) { self.owner = owner }
-        
+
         func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
             return owner.viewController
         }
-        
+
         func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
             controller.delegate = nil
             owner.isActive.wrappedValue = false
