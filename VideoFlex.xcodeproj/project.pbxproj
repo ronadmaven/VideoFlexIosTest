@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		732EC9CF2D54AABE00C1CFAC /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 732EC9CE2D54AABE00C1CFAC /* SDK */; };
-		732EC9D22D54ADE600C1CFAC /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 732EC9D12D54ADE600C1CFAC /* SDK */; };
+		73166CC72D54DE29003B3ECF /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73166CC62D54DE29003B3ECF /* CommonSwiftUI */; };
+		73166CC92D54E19E003B3ECF /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73166CC82D54E19E003B3ECF /* DebugMenu.swift */; };
+		73166CCC2D54E39C003B3ECF /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73166CCB2D54E39C003B3ECF /* CommonSwiftUI */; };
+		73166CCF2D54E3B5003B3ECF /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 73166CCE2D54E3B5003B3ECF /* SDK */; };
 		734065282D538F2200A69488 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065272D538F2200A69488 /* WebView.swift */; };
 		734065292D538F2200A69488 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065252D538F2200A69488 /* MailView.swift */; };
 		734065302D53900300A69488 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7340652F2D53900300A69488 /* CommonSwiftUI */; };
 		734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 734065322D53902B00A69488 /* CommonSwiftUI */; };
 		734065C42D539AD900A69488 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065C32D539AD900A69488 /* SplashScreenView.swift */; };
-		73D234842D54A30B00E0E1C6 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73D234832D54A30B00E0E1C6 /* CommonSwiftUI */; };
+		735140A82D54ECF70057EC1F /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 735140A72D54ECF70057EC1F /* SDK */; };
 		73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED582D5364D500394E4B /* SceneDelegate.swift */; };
 		73E6ED5C2D53660E00394E4B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED5B2D53660E00394E4B /* Config.swift */; };
 		73E6ED622D5367F300394E4B /* IsSubscribedEnvKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */; };
@@ -59,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		73166CC82D54E19E003B3ECF /* DebugMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
 		734065252D538F2200A69488 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		734065272D538F2200A69488 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		734065C32D539AD900A69488 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
@@ -98,11 +101,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73D234842D54A30B00E0E1C6 /* CommonSwiftUI in Frameworks */,
 				792A6FC628F0F52000CC8D74 /* PurchaseKit.xcframework in Frameworks */,
+				73166CCC2D54E39C003B3ECF /* CommonSwiftUI in Frameworks */,
+				73166CC72D54DE29003B3ECF /* CommonSwiftUI in Frameworks */,
+				73166CCF2D54E3B5003B3ECF /* SDK in Frameworks */,
+				735140A82D54ECF70057EC1F /* SDK in Frameworks */,
 				734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */,
-				732EC9D22D54ADE600C1CFAC /* SDK in Frameworks */,
-				732EC9CF2D54AABE00C1CFAC /* SDK in Frameworks */,
 				734065302D53900300A69488 /* CommonSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +241,7 @@
 		FA124EFD2AFAFDBE00A42AC3 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
+				73166CC82D54E19E003B3ECF /* DebugMenu.swift */,
 				FA124EFE2AFAFDD800A42AC3 /* BgCircleView.swift */,
 				FA124F002AFB024000A42AC3 /* NoBorderRectangle.swift */,
 				FA124F022AFB056B00A42AC3 /* BorderedRectangle.swift */,
@@ -264,9 +269,10 @@
 			packageProductDependencies = (
 				7340652F2D53900300A69488 /* CommonSwiftUI */,
 				734065322D53902B00A69488 /* CommonSwiftUI */,
-				73D234832D54A30B00E0E1C6 /* CommonSwiftUI */,
-				732EC9CE2D54AABE00C1CFAC /* SDK */,
-				732EC9D12D54ADE600C1CFAC /* SDK */,
+				73166CC62D54DE29003B3ECF /* CommonSwiftUI */,
+				73166CCB2D54E39C003B3ECF /* CommonSwiftUI */,
+				73166CCE2D54E3B5003B3ECF /* SDK */,
+				735140A72D54ECF70057EC1F /* SDK */,
 			);
 			productName = Convertly;
 			productReference = 794FCADC28F0F3F800873961 /* VideoFlex.app */;
@@ -297,8 +303,8 @@
 			);
 			mainGroup = 794FCAD328F0F3F800873961;
 			packageReferences = (
-				73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */,
-				732EC9D02D54ADE500C1CFAC /* XCRemoteSwiftPackageReference "apps_sdk" */,
+				73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */,
+				735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */,
 			);
 			productRefGroup = 794FCADD28F0F3F800873961 /* Products */;
 			projectDirPath = "";
@@ -343,6 +349,7 @@
 				792A6FD728F0F96900CC8D74 /* DataManager.swift in Sources */,
 				FA124EFF2AFAFDD800A42AC3 /* BgCircleView.swift in Sources */,
 				734065282D538F2200A69488 /* WebView.swift in Sources */,
+				73166CC92D54E19E003B3ECF /* DebugMenu.swift in Sources */,
 				734065292D538F2200A69488 /* MailView.swift in Sources */,
 				794FCAE028F0F3F800873961 /* ConvertlyApp.swift in Sources */,
 				73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */,
@@ -479,7 +486,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
@@ -518,7 +525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
@@ -574,15 +581,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		732EC9D02D54ADE500C1CFAC /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk";
-			requirement = {
-				branch = Legacy;
-				kind = branch;
-			};
-		};
-		73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */ = {
+		73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/CommonSwiftUI";
 			requirement = {
@@ -590,16 +589,28 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk";
+			requirement = {
+				branch = Legacy;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		732EC9CE2D54AABE00C1CFAC /* SDK */ = {
+		73166CC62D54DE29003B3ECF /* CommonSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SDK;
+			productName = CommonSwiftUI;
 		};
-		732EC9D12D54ADE600C1CFAC /* SDK */ = {
+		73166CCB2D54E39C003B3ECF /* CommonSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 732EC9D02D54ADE500C1CFAC /* XCRemoteSwiftPackageReference "apps_sdk" */;
+			package = 73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */;
+			productName = CommonSwiftUI;
+		};
+		73166CCE2D54E3B5003B3ECF /* SDK */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = SDK;
 		};
 		7340652F2D53900300A69488 /* CommonSwiftUI */ = {
@@ -610,10 +621,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonSwiftUI;
 		};
-		73D234832D54A30B00E0E1C6 /* CommonSwiftUI */ = {
+		735140A72D54ECF70057EC1F /* SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */;
-			productName = CommonSwiftUI;
+			package = 735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */;
+			productName = SDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

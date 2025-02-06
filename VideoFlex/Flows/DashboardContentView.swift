@@ -14,6 +14,7 @@ import UIKit
 struct DashboardContentView: View {
     @EnvironmentObject var sdk: TheSDK
     @EnvironmentObject var manager: DataManager
+    @EnvironmentObject var userState: UserState
     @Environment(\.isSubscribed) var isSubscribed: Bool
 
     @State var showSettings: Bool = false
@@ -25,9 +26,12 @@ struct DashboardContentView: View {
     var body: some View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
+
             BgCircleView()
+
             VStack {
                 CustomHeaderView
+
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 16) {
                         ImportMediaSectionView
@@ -131,9 +135,18 @@ struct DashboardContentView: View {
                     .font(.custom(Fonts.UbuntuMedium, size: 16, relativeTo: .headline))
             }.foregroundColor(.white)
             Spacer()
-            Button { manager.fullScreenMode = .settings } label: {
+
+            if userState.debug {
+                DebugMenu()
+            }
+
+            ButtonWithLongPress(callback: {
+                manager.fullScreenMode = .settings
+            }, label: {
                 Image(systemName: "gearshape").foregroundColor(.white)
                     .font(.system(size: 24, weight: .light))
+            }, longPressSecodns: 2) {
+                userState.debug = true
             }
         } // .padding(.top,10)
         .padding(.bottom)
@@ -317,19 +330,6 @@ struct DashboardContentView: View {
                     .frame(width: nil)
             )
     }
-
-//    /// Premium in-app purchases view
-//    private var PremiumView: some View {
-//        PremiumContentView(title: "Premium Version", subtitle: "Unlock All Features", features: ["Video to GIF", "Merge Videos", "Remove Ads"], productIds: [AppConfig.premiumVersion]) {
-//            manager.fullScreenMode = nil
-//        } completion: { _, status, _ in
-//            DispatchQueue.main.async {
-//                if status == .success || status == .restored {
-//                    manager.isPremiumUser = true
-//                }
-//            }
-//        }
-//    }
 }
 
 // MARK: - Preview UI
@@ -340,6 +340,7 @@ struct DashboardContentView_Previews: PreviewProvider {
         return DashboardContentView()
             .environmentObject(manager)
             .environmentObject(TheSDK(config: .init(baseURL: Config.serverURL)))
+            .environmentObject(UserState())
             .environment(\.isSubscribed, true)
     }
 }

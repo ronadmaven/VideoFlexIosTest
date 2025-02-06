@@ -8,18 +8,23 @@
 import CommonSwiftUI
 import SDK
 import SwiftUI
+
+class UserState: ObservableObject {
+    @Published var debug: Bool = false
+}
+
 @main
 struct VideoFlexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    @StateObject private var manager: DataManager = DataManager()
     @State private var showDashboard: Bool = false
-    @State var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
-                                                 appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
-                                                 logOptions: .js,
-                                                 manageNotifications: true))
-
     @State var launchScreen: AnyView?
+    @StateObject var userSettings: UserState = .init()
+    @StateObject private var manager: DataManager = DataManager()
+    @StateObject var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
+                                                       appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
+                                                       logOptions: .js,
+                                                       manageNotifications: true))
 
     init() {
         RateusAlert.rules = .init(minSecondsBetweenPresentations: 24 * 60 * 60, rateByAppVersion: true)
@@ -41,6 +46,7 @@ struct VideoFlexApp: App {
             .environment(\.isSubscribed, sdk.isSubsccribed)
             .environmentObject(sdk)
             .environmentObject(manager)
+            .environmentObject(userSettings)
             .onFirstAppear {
                 if wasLaunchedFromNotification {
                     launchScreen = AnyView(DashboardContentView())
