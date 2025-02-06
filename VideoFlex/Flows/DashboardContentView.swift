@@ -5,8 +5,11 @@
 //  Created by Booysenberry on 10/7/22.
 //
 
+import CommonSwiftUI
 import SDK
+import StoreKit
 import SwiftUI
+import UIKit
 /// Main dashboard for the app
 struct DashboardContentView: View {
     @EnvironmentObject var sdk: TheSDK
@@ -14,6 +17,8 @@ struct DashboardContentView: View {
     @Environment(\.isSubscribed) var isSubscribed: Bool
 
     @State var showSettings: Bool = false
+    @State var showRateus: Bool = false
+    @State var lastFileHistoryCount: Int = 0
 
     // MARK: - Main rendering function
 
@@ -34,7 +39,7 @@ struct DashboardContentView: View {
 
             /// Show bottom sheet for file conversion and tools
             if manager.showBottomSheet && manager.selectedVideoThumbnail != nil {
-                BottomSheetView().environmentObject(manager)
+                BottomSheetView()
             }
 
             /// Show loading view and file preview
@@ -42,6 +47,17 @@ struct DashboardContentView: View {
                 .background(FilePreview($manager.showFilePreview, url: manager.selectedFileURL))
         }
         .navigationBarHidden(true)
+        .overlay {
+            if showRateus {
+                RateusAlert(show: $showRateus, imageName: "rateusIcon") {
+                    if case let .rate(rate) = $0, rate >= 3 {
+                        if let url = URL(string: "https://apps.apple.com/app/id\(Config.appId)?action=write-review") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                }
+            }
+        }
         .onChange(of: manager.fullScreenMode) { newValue in
             switch newValue {
             case .premium:
@@ -56,6 +72,15 @@ struct DashboardContentView: View {
                 showSettings = true
 
             default: break
+            }
+        }
+        .onChange(of: manager.shareSheetShow) { newValue in
+            guard !newValue else { return }
+
+            if RateusAlert.shouldPresent {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showRateus = true
+                }
             }
         }
         .fullScreenCover(isPresented: $showSettings, content: {
@@ -73,6 +98,12 @@ struct DashboardContentView: View {
             GalleryAssetPickerView(videoMaximumDuration: manager.videoToolType.videoDuration) { video in
                 manager.handleSelectedAsset(video)
             }
+        }
+        .onFirstAppear {
+            lastFileHistoryCount = manager.filesHistory.count
+        }
+        .onAppear {
+            print("on appear")
         }
     }
 

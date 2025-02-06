@@ -29,6 +29,7 @@ class DataManager: NSObject, ObservableObject {
     @Published var showBottomSheet: Bool = false
     @Published var showFilePreview: Bool = false
     @Published var selectedFileURL: URL?
+    @Published var shareSheetShow: Bool = false
 
     /// Internal properties
     internal var mergeVideoAssets: [AVAsset] = [AVAsset]()

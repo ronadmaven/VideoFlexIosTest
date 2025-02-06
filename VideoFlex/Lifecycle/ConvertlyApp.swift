@@ -21,6 +21,10 @@ struct VideoFlexApp: App {
 
     @State var launchScreen: AnyView?
 
+    init() {
+        RateusAlert.rules = .init(minSecondsBetweenPresentations: 24 * 60 * 60, rateByAppVersion: true)
+    }
+
     // MARK: - Main rendering function
 
     var body: some Scene {

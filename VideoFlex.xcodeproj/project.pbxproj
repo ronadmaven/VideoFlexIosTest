@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 734065322D53902B00A69488 /* CommonSwiftUI */; };
 		734065362D53907E00A69488 /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 734065352D53907E00A69488 /* SDK */; };
 		734065C42D539AD900A69488 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734065C32D539AD900A69488 /* SplashScreenView.swift */; };
+		73D234842D54A30B00E0E1C6 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73D234832D54A30B00E0E1C6 /* CommonSwiftUI */; };
 		73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED582D5364D500394E4B /* SceneDelegate.swift */; };
 		73E6ED5C2D53660E00394E4B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED5B2D53660E00394E4B /* Config.swift */; };
 		73E6ED622D5367F300394E4B /* IsSubscribedEnvKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */; };
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73D234842D54A30B00E0E1C6 /* CommonSwiftUI in Frameworks */,
 				792A6FC628F0F52000CC8D74 /* PurchaseKit.xcframework in Frameworks */,
 				734065362D53907E00A69488 /* SDK in Frameworks */,
 				734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */,
@@ -261,6 +263,7 @@
 				7340652F2D53900300A69488 /* CommonSwiftUI */,
 				734065322D53902B00A69488 /* CommonSwiftUI */,
 				734065352D53907E00A69488 /* SDK */,
+				73D234832D54A30B00E0E1C6 /* CommonSwiftUI */,
 			);
 			productName = Convertly;
 			productReference = 794FCADC28F0F3F800873961 /* VideoFlex.app */;
@@ -291,8 +294,8 @@
 			);
 			mainGroup = 794FCAD328F0F3F800873961;
 			packageReferences = (
-				734065312D53902B00A69488 /* XCLocalSwiftPackageReference "../../CommonSwiftUI" */,
 				734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */,
+				73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */,
 			);
 			productRefGroup = 794FCADD28F0F3F800873961 /* Products */;
 			projectDirPath = "";
@@ -493,7 +496,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bb.VideoFlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -532,7 +535,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bb.VideoFlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -567,13 +570,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		734065312D53902B00A69488 /* XCLocalSwiftPackageReference "../../CommonSwiftUI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../CommonSwiftUI;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -581,6 +577,14 @@
 			requirement = {
 				branch = Legacy;
 				kind = branch;
+			};
+		};
+		73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/CommonSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -598,6 +602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 734065342D53907E00A69488 /* XCRemoteSwiftPackageReference "apps_sdk" */;
 			productName = SDK;
+		};
+		73D234832D54A30B00E0E1C6 /* CommonSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73D234822D54A30B00E0E1C6 /* XCRemoteSwiftPackageReference "CommonSwiftUI" */;
+			productName = CommonSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

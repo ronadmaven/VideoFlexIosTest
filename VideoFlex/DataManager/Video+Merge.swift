@@ -6,27 +6,27 @@
 //
 
 import AVKit
-import UIKit
 import Foundation
+import UIKit
 
 // MARK: - Merge Multiple Videos
+
 extension DataManager {
-    
     /// Merge all videos into 1 video file
     func mergeVideos(portrait: Bool) {
         guard mergeVideoAssets.count > 1 else {
             presentAlert(title: "Oops!", message: "You need at least 2 videos to merge")
             return
         }
-        
+
         var insertTime: CMTime = .zero
         var arrayLayerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
-        
+
         let defaultResolution: CGSize = AppConfig.mergedVideoResolution
         let portraitResolution: CGSize = CGSize(width: defaultResolution.height, height: defaultResolution.width)
         let videoResolution: CGSize = portrait ? portraitResolution : defaultResolution
         let mixComposition = AVMutableComposition()
-        
+
         for videoAsset in mergeVideoAssets {
             guard let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video).first else { continue }
 
@@ -34,12 +34,12 @@ extension DataManager {
             if videoAsset.tracks(withMediaType: AVMediaType.audio).count > 0 {
                 audioTrack = videoAsset.tracks(withMediaType: AVMediaType.audio).first
             }
-            
+
             let videoComposition = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
-                                                                       preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+                                                                  preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             let audioComposition = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
-                                                                       preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-            
+                                                                  preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+
             let startTime = CMTime.zero
             let duration = videoAsset.duration
             try? videoComposition?.insertTimeRange(CMTimeRangeMake(start: startTime, duration: duration), of: videoTrack, at: insertTime)
@@ -57,24 +57,24 @@ extension DataManager {
 
             insertTime = CMTimeAdd(insertTime, duration)
         }
-        
+
         let mainInstruction = AVMutableVideoCompositionInstruction()
         mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: insertTime)
         mainInstruction.layerInstructions = arrayLayerInstructions
-        
+
         let mainComposition = AVMutableVideoComposition()
         mainComposition.instructions = [mainInstruction]
         mainComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
         mainComposition.renderSize = videoResolution
-        
+
         /// Export merged video to URL
-        guard let exportSession = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else {
+        guard let exportSession = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else {
             presentAlert(title: "Oops!", message: "Something went wrong\nPlease try again later")
             return
         }
-        
+
         showLoadingView = true
-        
+
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let path = documentsDirectoryPath.appending("/video-\(Date().string(format: "MM-dd_HH-mm-ss")).mp4")
         exportSession.outputFileType = .mp4
@@ -87,6 +87,12 @@ extension DataManager {
                 switch exportSession.status {
                 case .completed:
                     let controller = UIActivityViewController(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
+
+                    controller.completionWithItemsHandler = { _, _, _, _ in
+                        self.shareSheetShow = false
+                    }
+                    self.shareSheetShow = true
+
                     rootController?.present(controller, animated: true)
                     self.fetchFilesHistory()
                 default:
@@ -95,28 +101,27 @@ extension DataManager {
             }
         }
     }
-    
+
     /// Create video composition instruction
     private func videoCompositionInstructionForTrack(track: AVCompositionTrack?, asset: AVAsset, targetSize: CGSize) -> AVMutableVideoCompositionLayerInstruction {
-        
         guard let track = track else { return AVMutableVideoCompositionLayerInstruction() }
-        
+
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
         let transform = assetTrack.fixedPreferredTransform
         let assetInfo = orientationFromTransform(transform)
         var scaleToFitRatio = targetSize.width / assetTrack.naturalSize.width
-        
+
         if assetInfo.isPortrait {
             scaleToFitRatio = targetSize.width / assetTrack.naturalSize.height
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
-            let newY = targetSize.height/2 - (assetTrack.naturalSize.width * scaleToFitRatio)/2
+            let newY = targetSize.height / 2 - (assetTrack.naturalSize.width * scaleToFitRatio) / 2
             let moveCenterFactor = CGAffineTransform(translationX: 0, y: newY)
             let finalTransform = transform.concatenating(scaleFactor).concatenating(moveCenterFactor)
             instruction.setTransform(finalTransform, at: .zero)
         } else {
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
-            let newY = targetSize.height/2 - (assetTrack.naturalSize.height * scaleToFitRatio)/2
+            let newY = targetSize.height / 2 - (assetTrack.naturalSize.height * scaleToFitRatio) / 2
             let moveCenterFactor = CGAffineTransform(translationX: 0, y: newY)
             let finalTransform = transform.concatenating(scaleFactor).concatenating(moveCenterFactor)
             instruction.setTransform(finalTransform, at: .zero)
@@ -124,36 +129,37 @@ extension DataManager {
 
         return instruction
     }
-    
+
     /// Get asset orientation
     private func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {
         var assetOrientation = UIImage.Orientation.up
         var isPortrait = false
-        
+
         switch [transform.a, transform.b, transform.c, transform.d] {
         case [0.0, 1.0, -1.0, 0.0]:
             assetOrientation = .right
             isPortrait = true
-            
+
         case [0.0, -1.0, 1.0, 0.0]:
             assetOrientation = .left
             isPortrait = true
-            
+
         case [1.0, 0.0, 0.0, 1.0]:
             assetOrientation = .up
-            
+
         case [-1.0, 0.0, 0.0, -1.0]:
             assetOrientation = .down
 
         default:
             break
         }
-    
+
         return (assetOrientation, isPortrait)
     }
 }
 
 // MARK: - Useful AV extensions
+
 extension AVAssetTrack {
     var fixedPreferredTransform: CGAffineTransform {
         var updatedTransform = preferredTransform
@@ -212,4 +218,3 @@ extension UIImage {
         size.height > size.width
     }
 }
-
