@@ -36,13 +36,6 @@ struct VideoFlexApp: App {
                     } else {
                         Color.clear
                     }
-
-                    NavigationLink(
-                        destination: DashboardContentView(),
-                        isActive: $showDashboard
-                    ) {
-                        EmptyView()
-                    }
                 }
             }
             .environment(\.isSubscribed, sdk.isSubsccribed)
@@ -52,9 +45,7 @@ struct VideoFlexApp: App {
                 if wasLaunchedFromNotification {
                     launchScreen = AnyView(DashboardContentView())
                 } else {
-                    launchScreen = AnyView(SplashScreen(show: .init(get: { true }, set: { _ in
-                        showDashboard = true
-                    })))
+                    launchScreen = AnyView(SplashScreen())
                 }
             }
         }
