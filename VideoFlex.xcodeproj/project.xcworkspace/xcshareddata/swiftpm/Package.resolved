@@ -1,5 +1,5 @@
 {
-  "originHash" : "95310aa443161d4b6c7eec8ab74fbef609d873f0ac07c1640a1d2ed1c1074f26",
+  "originHash" : "1724b798a07d4c5c7d65d1c42961cf0abdf8e6f4b05b2c938d738fd5832cbc47",
   "pins" : [
     {
       "identity" : "apps_sdk",
@@ -7,7 +7,7 @@
       "location" : "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk",
       "state" : {
         "branch" : "Legacy",
-        "revision" : "6c19d4f6cd3960caab0f76de8fb4df09a29c70cb"
+        "revision" : "69b3cc782885fd468155c59dfead58e247bb3c45"
       }
     },
     {
