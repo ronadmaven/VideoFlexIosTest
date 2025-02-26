@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7315D5F02D6EF5240018397D /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7315D5EF2D6EF5240018397D /* SDK */; };
+		7315D5F22D6EF5280018397D /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7315D5F12D6EF5280018397D /* SDK */; };
 		73166CC72D54DE29003B3ECF /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73166CC62D54DE29003B3ECF /* CommonSwiftUI */; };
 		73166CC92D54E19E003B3ECF /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73166CC82D54E19E003B3ECF /* DebugMenu.swift */; };
 		73166CCC2D54E39C003B3ECF /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73166CCB2D54E39C003B3ECF /* CommonSwiftUI */; };
@@ -23,8 +25,7 @@
 		73484E512D6EDA09004F0BA1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73484E492D6EDA09004F0BA1 /* Events.swift */; };
 		73484E5D2D6EDAC1004F0BA1 /* NotificationServiceExtention.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 73484E562D6EDAC1004F0BA1 /* NotificationServiceExtention.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73484EAD2D6EDB15004F0BA1 /* CommonSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 73484EAC2D6EDB15004F0BA1 /* CommonSwiftUI */; };
-		73484EAF2D6EDB15004F0BA1 /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 73484EAE2D6EDB15004F0BA1 /* SDK */; };
-		735140A82D54ECF70057EC1F /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 735140A72D54ECF70057EC1F /* SDK */; };
+		737397A42D6EF24C007103BA /* SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 737397A32D6EF24C007103BA /* SDK */; };
 		73E6ED592D5364D500394E4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED582D5364D500394E4B /* SceneDelegate.swift */; };
 		73E6ED5C2D53660E00394E4B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED5B2D53660E00394E4B /* Config.swift */; };
 		73E6ED622D5367F300394E4B /* IsSubscribedEnvKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6ED612D5367F300394E4B /* IsSubscribedEnvKey.swift */; };
@@ -149,7 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73484EAD2D6EDB15004F0BA1 /* CommonSwiftUI in Frameworks */,
-				73484EAF2D6EDB15004F0BA1 /* SDK in Frameworks */,
+				7315D5F22D6EF5280018397D /* SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +162,8 @@
 				73166CCC2D54E39C003B3ECF /* CommonSwiftUI in Frameworks */,
 				73166CC72D54DE29003B3ECF /* CommonSwiftUI in Frameworks */,
 				73166CCF2D54E3B5003B3ECF /* SDK in Frameworks */,
-				735140A82D54ECF70057EC1F /* SDK in Frameworks */,
+				737397A42D6EF24C007103BA /* SDK in Frameworks */,
+				7315D5F02D6EF5240018397D /* SDK in Frameworks */,
 				734065332D53902B00A69488 /* CommonSwiftUI in Frameworks */,
 				734065302D53900300A69488 /* CommonSwiftUI in Frameworks */,
 			);
@@ -356,7 +358,7 @@
 			name = NotificationServiceExtention;
 			packageProductDependencies = (
 				73484EAC2D6EDB15004F0BA1 /* CommonSwiftUI */,
-				73484EAE2D6EDB15004F0BA1 /* SDK */,
+				7315D5F12D6EF5280018397D /* SDK */,
 			);
 			productName = NotificationServiceExtention;
 			productReference = 73484E562D6EDAC1004F0BA1 /* NotificationServiceExtention.appex */;
@@ -384,7 +386,8 @@
 				73166CC62D54DE29003B3ECF /* CommonSwiftUI */,
 				73166CCB2D54E39C003B3ECF /* CommonSwiftUI */,
 				73166CCE2D54E3B5003B3ECF /* SDK */,
-				735140A72D54ECF70057EC1F /* SDK */,
+				737397A32D6EF24C007103BA /* SDK */,
+				7315D5EF2D6EF5240018397D /* SDK */,
 			);
 			productName = Convertly;
 			productReference = 794FCADC28F0F3F800873961 /* VideoFlex.app */;
@@ -419,7 +422,7 @@
 			mainGroup = 794FCAD328F0F3F800873961;
 			packageReferences = (
 				73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */,
-				735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */,
+				7315D5EE2D6EF5240018397D /* XCRemoteSwiftPackageReference "apps_sdk" */,
 			);
 			productRefGroup = 794FCADD28F0F3F800873961 /* Products */;
 			projectDirPath = "";
@@ -513,7 +516,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationServiceExtention/NotificationServiceExtention.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -548,7 +551,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationServiceExtention/NotificationServiceExtention.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -697,7 +700,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
@@ -737,7 +740,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VideoFlex/VideoFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VideoFlex/Preview Content\"";
 				DEVELOPMENT_TEAM = 8CSV347CCR;
 				ENABLE_PREVIEWS = YES;
@@ -803,6 +806,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7315D5EE2D6EF5240018397D /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk";
+			requirement = {
+				branch = Legacy;
+				kind = branch;
+			};
+		};
 		73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/CommonSwiftUI";
@@ -811,17 +822,19 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk";
-			requirement = {
-				branch = Legacy;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7315D5EF2D6EF5240018397D /* SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7315D5EE2D6EF5240018397D /* XCRemoteSwiftPackageReference "apps_sdk" */;
+			productName = SDK;
+		};
+		7315D5F12D6EF5280018397D /* SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7315D5EE2D6EF5240018397D /* XCRemoteSwiftPackageReference "apps_sdk" */;
+			productName = SDK;
+		};
 		73166CC62D54DE29003B3ECF /* CommonSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonSwiftUI;
@@ -848,14 +861,8 @@
 			package = 73166CCA2D54E39C003B3ECF /* XCRemoteSwiftPackageReference "CommonSwiftUI" */;
 			productName = CommonSwiftUI;
 		};
-		73484EAE2D6EDB15004F0BA1 /* SDK */ = {
+		737397A32D6EF24C007103BA /* SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */;
-			productName = SDK;
-		};
-		735140A72D54ECF70057EC1F /* SDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 735140A62D54ECF70057EC1F /* XCRemoteSwiftPackageReference "apps_sdk" */;
 			productName = SDK;
 		};
 /* End XCSwiftPackageProductDependency section */

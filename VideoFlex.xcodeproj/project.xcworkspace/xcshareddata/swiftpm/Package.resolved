@@ -1,5 +1,5 @@
 {
-  "originHash" : "1724b798a07d4c5c7d65d1c42961cf0abdf8e6f4b05b2c938d738fd5832cbc47",
+  "originHash" : "95310aa443161d4b6c7eec8ab74fbef609d873f0ac07c1640a1d2ed1c1074f26",
   "pins" : [
     {
       "identity" : "apps_sdk",
@@ -7,7 +7,7 @@
       "location" : "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk",
       "state" : {
         "branch" : "Legacy",
-        "revision" : "69661f53b5f815bb2f728ad39da100784bf47547"
+        "revision" : "0e8797bb461c17559a5d5dee21bcbf660eba31f9"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AppsFlyerSDK/appsflyer-apple-purchase-connector.git",
       "state" : {
-        "revision" : "1c66e41dbb9b0f5a501859c6d282a90cf632ad34",
-        "version" : "6.15.2"
+        "revision" : "d5149982cd4fac3265c7af39a4abc70fded55ca9",
+        "version" : "6.15.3"
       }
     },
     {

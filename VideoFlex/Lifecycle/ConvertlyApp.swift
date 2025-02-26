@@ -23,7 +23,7 @@ struct VideoFlexApp: App {
     @StateObject private var manager: DataManager = DataManager()
     @StateObject var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
                                                        appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
-                                                       logOptions: .native,
+                                                       logOptions: .none,
                                                        manageNotifications: true))
 
     init() {

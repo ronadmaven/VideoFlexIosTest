@@ -279,7 +279,7 @@ struct DashboardContentView: View {
                 }
                 .foregroundColor(.lightGrayColor)
                 .onTapGesture {
-                    sdk.presentSDKView(page: .unlockContent, show: nil)
+                    sdk.presentSDKView(page: .premium, show: nil)
                     A.s.send(event: Events.UserTappedPremiumButton())
                 }
             }
@@ -361,6 +361,6 @@ struct DashboardContentView_Previews: PreviewProvider {
             .environmentObject(manager)
             .environmentObject(TheSDK(config: .init(baseURL: Config.serverURL)))
             .environmentObject(UserState())
-            .environment(\.isSubscribed, true)
+            .environment(\.isSubscribed, false)
     }
 }
