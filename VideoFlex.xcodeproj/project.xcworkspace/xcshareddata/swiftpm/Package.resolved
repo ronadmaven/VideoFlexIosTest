@@ -7,7 +7,7 @@
       "location" : "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/apps_sdk",
       "state" : {
         "branch" : "Legacy",
-        "revision" : "69b3cc782885fd468155c59dfead58e247bb3c45"
+        "revision" : "69661f53b5f815bb2f728ad39da100784bf47547"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/CommonSwiftUI",
       "state" : {
-        "revision" : "19f4534e748320f9cf06b0710ba2e22197fd6aec",
-        "version" : "1.0.29"
+        "revision" : "4466480fe99bc41066ec1a8e6b62bd7c695517ef",
+        "version" : "1.0.30"
       }
     },
     {

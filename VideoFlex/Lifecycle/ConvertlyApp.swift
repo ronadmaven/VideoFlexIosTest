@@ -23,11 +23,15 @@ struct VideoFlexApp: App {
     @StateObject private var manager: DataManager = DataManager()
     @StateObject var sdk: TheSDK = .init(config: .init(baseURL: Config.serverURL,
                                                        appsFlyer: (appId: Config.appId, devKey: Config.appsFlyerDevKey),
-                                                       logOptions: .js,
+                                                       logOptions: .native,
                                                        manageNotifications: true))
 
     init() {
         RateusAlert.rules = .init(minSecondsBetweenPresentations: 24 * 60 * 60, rateByAppVersion: true)
+
+        A.s.addSubVendor(SDKAnalyticsVendor(sdk: sdk))
+
+        KeyChainUtil.set(value: sdk.userId, forKey: "userId")
     }
 
     // MARK: - Main rendering function

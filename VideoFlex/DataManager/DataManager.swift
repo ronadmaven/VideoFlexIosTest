@@ -77,9 +77,13 @@ extension DataManager: UIDocumentPickerDelegate {
 
     /// Handle selected image files from Files iOS app
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        
         guard let fileURL = urls.first else { return }
         guard fileURL.startAccessingSecurityScopedResource() else { return }
         defer { fileURL.stopAccessingSecurityScopedResource() }
+        
+        A.s.send(event: Events.UserImportVideoFromFile())
+        
         fullScreenMode = nil
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
         let path = documentsDirectoryPath.appending(fileURL.lastPathComponent)

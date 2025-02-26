@@ -46,6 +46,9 @@ struct MailView: UIViewControllerRepresentable {
         mailVC.setToRecipients(recipients)
         mailVC.setSubject(subject)
         mailVC.setMessageBody(body, isHTML: false)
+
+        A.s.send(event: Events.AppPresentedScreen(screen: .mail))
+
         return mailVC
     }
 

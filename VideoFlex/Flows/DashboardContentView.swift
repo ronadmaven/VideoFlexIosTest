@@ -54,10 +54,17 @@ struct DashboardContentView: View {
         .overlay {
             if showRateus {
                 RateusAlert(show: $showRateus, imageName: "rateusIcon") {
-                    if case let .rate(rate) = $0, rate >= 3 {
-                        if let url = URL(string: "https://apps.apple.com/app/id\(Config.appId)?action=write-review") {
-                            UIApplication.shared.open(url)
+                    switch $0 {
+                    case let .rate(rate):
+                        A.s.send(event: Events.UserDidRateApp(rate: rate))
+                        if rate >= 3 {
+                            if let url = URL(string: "https://apps.apple.com/app/id\(Config.appId)?action=write-review") {
+                                UIApplication.shared.open(url)
+                            }
                         }
+
+                    case .cancel:
+                        A.s.send(event: Events.UserDismissedRateAppDialog())
                     }
                 }
             }
@@ -85,6 +92,7 @@ struct DashboardContentView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     showRateus = true
                 }
+                A.s.send(event: Events.AppInitiatedRateApp())
             }
         }
         .fullScreenCover(isPresented: $showSettings, content: {
@@ -101,13 +109,17 @@ struct DashboardContentView: View {
         .sheet(isPresented: $manager.showPhotoPicker) {
             GalleryAssetPickerView(videoMaximumDuration: manager.videoToolType.videoDuration) { video in
                 manager.handleSelectedAsset(video)
+
+                if video != nil {
+                    A.s.send(event: Events.UserImportVideoFromPhotoGalery())
+                }
             }
         }
         .onFirstAppear {
             lastFileHistoryCount = manager.filesHistory.count
         }
         .onAppear {
-            print("on appear")
+            A.s.send(event: Events.AppPresentedScreen(screen: .dashboard))
         }
     }
 
@@ -158,14 +170,17 @@ struct DashboardContentView: View {
     private var ImportMediaSectionView: some View {
         VStack(spacing: 15) {
             SectionHeader(title: "Import Media")
+
             VStack(spacing: 15) {
                 MediaImportTool(title: "From File") {
                     manager.videoToolType = .regular
                     rootController?.present(manager.documentViewController(), animated: true)
+                    A.s.send(event: Events.UserTappedImportFromFileButton())
                 }
                 MediaImportTool(title: "From Photo") {
                     manager.videoToolType = .regular
                     manager.showPhotoPicker = true
+                    A.s.send(event: Events.UserTappedImportPhotoFileButton())
                 }
             }
         }.padding()
@@ -203,12 +218,14 @@ struct DashboardContentView: View {
                 OtherTool(title: "Video to GIF") {
                     manager.videoToolType = .videoGIF
                     manager.showPhotoPicker = true
+                    A.s.send(event: Events.UserTappedVideoToGif())
                 }
                 OtherTool(title: "Merge Videos") {
                     manager.mergeVideoThumbnails.removeAll()
                     manager.mergeVideoAssets.removeAll()
                     manager.videoToolType = .mergeVideos
                     manager.showPhotoPicker = true
+                    A.s.send(event: Events.UserTappedMergeVideo())
                 }
             }.overlay(PremiumOverlay)
         }.padding().background(
@@ -239,6 +256,7 @@ struct DashboardContentView: View {
             if !isSubscribed {
                 VStack {
                     Spacer()
+
                     Image("Premium").font(.system(size: 27))
                         .padding(.horizontal, 25)
                         .padding(.vertical)
@@ -248,6 +266,7 @@ struct DashboardContentView: View {
                                 .shadow(radius: 6, x: 0, y: 3)
                         )
                     Spacer()
+
                     Text("Premium Features").font(.custom(Fonts.UbuntuMedium, size: 16, relativeTo: .body))
                         .padding(.horizontal, 30)
                         .padding(.vertical, 10)
@@ -261,6 +280,7 @@ struct DashboardContentView: View {
                 .foregroundColor(.lightGrayColor)
                 .onTapGesture {
                     sdk.presentSDKView(page: .unlockContent, show: nil)
+                    A.s.send(event: Events.UserTappedPremiumButton())
                 }
             }
         }

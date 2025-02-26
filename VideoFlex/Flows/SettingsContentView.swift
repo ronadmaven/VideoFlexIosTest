@@ -70,6 +70,9 @@ struct SettingsContentView: View {
                 }
             }
         }
+        .onAppear {
+            A.s.send(event: Events.AppPresentedScreen(screen: .settings))
+        }
     }
 
     /// Custom header view
@@ -174,9 +177,7 @@ struct SettingsContentView: View {
         VStack {
             SettingsItem(title: "Rate App", icon: "star") {
                 showRateUs = true
-//                if let scene = UIApplication.shared.windows.first?.windowScene {
-//                    SKStoreReviewController.requestReview(in: scene)
-//                }
+                A.s.send(event: Events.UserInitiatedRateApp())
             }
 
             Color.extraDarkGrayColor.frame(height: 1).opacity(0.8).padding(.horizontal)
@@ -185,8 +186,9 @@ struct SettingsContentView: View {
                 let shareController = UIActivityViewController(activityItems: [AppConfig.yourAppURL], applicationActivities: nil)
                 rootController?.present(shareController, animated: true, completion: nil)
             }
-        }.padding([.top, .bottom], 5)
-            .padding(.bottom, 40)
+        }
+        .padding([.top, .bottom], 5)
+        .padding(.bottom, 40)
     }
 
     // MARK: - Support & Privacy

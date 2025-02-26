@@ -10,28 +10,26 @@ import WebKit
 
 @MainActor
 struct WebView: UIViewRepresentable {
- 
     let url: URL
     let webView: WKWebView
-    
+
     init(url: URL) {
         self.url = url
         let config1 = WKWebViewConfiguration()
         config1.processPool = WKProcessPool()
-        webView = WKWebView(frame: .zero,configuration: config1)
+        webView = WKWebView(frame: .zero, configuration: config1)
     }
-    
+
     func makeUIView(context: Context) -> WKWebView {
+        A.s.send(event: Events.AppPresentedScreen(screen: .web))
         return webView
     }
+
     func updateUIView(_ uiView: WKWebView, context: Context) {
         webView.load(URLRequest(url: url))
     }
 }
 
-
 #Preview {
     WebView(url: .init(string: "http://www.google.com")!)
 }
-
-
