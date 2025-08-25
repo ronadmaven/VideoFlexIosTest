@@ -1,75 +1,243 @@
-# VideoFlex
+# VideoFlex - iOS Video Conversion App
 
-## Code Structure
+## Overview
 
-* Configuration 
-* Flows - all app screens/flows
-* Lifecycle - basic app launch files
-* DataManager - main data managers
+VideoFlex is a modern iOS application built with SwiftUI that provides powerful video conversion and manipulation tools. The app allows users to:
 
-**DashboardContentView** is the app's main view where we list all the available tools, as well as the list of recently converted files. 
+- **Convert Video to Audio**: Extract audio from videos in multiple formats (M4A, WAV, CAF)
+- **Convert Video to GIF**: Create animated GIFs from videos with customizable frame rates
+- **Merge Videos**: Combine multiple videos into a single file with orientation options
 
-**BottomSheetView** is displayed after the user imports a video. This view is dynamic based on the tool that the user selected. For example: When the user selects Video to GIF, we will simply show a tool to let users select the number of frames per second for the GIF. When the user selects the Merge Videos tool, we show diﬀerent controls in this bottom sheet view. 
+All processing happens on-device, ensuring user privacy and data security.
 
-**DataManager** is the main manager for the app that handles selected videos, however, we have extensions for this class based on the selected tool. 
+## Technical Stack
 
-You can change the maximum number of seconds for a GIF file, but for best performance we recommend no more than 5 seconds.
+- **iOS 14.0+** minimum deployment target
+- **SwiftUI** for the entire UI layer
+- **AVFoundation** for video/audio processing
+- **Combine** for reactive programming
+- **Swift Package Manager** for dependency management
+- **MVVM Architecture** with observable data flow
 
-You can also update the number of frames per second for a GIF file, but don’t forget to test each change that you make. The more frames per second you set in this file, the longer it will take to convert a video to a GIF file. 
+## Project Structure
 
-**AppConfig** contains helpful configurations that you can change if required.
+```
+ios-app-test/
+├── VideoFlex/                     # Main iOS app
+│   ├── Assets.xcassets/          # Images, colors, and app icons
+│   ├── Configuration/            # App-wide configuration
+│   │   └── AppConfig.swift      # Centralized settings (IAP, AdMob, limits)
+│   ├── DataManager/             # Core business logic
+│   │   ├── DataManager.swift   # Main data orchestrator
+│   │   ├── Video+GIF.swift     # GIF conversion implementation
+│   │   ├── Video+Merge.swift   # Video merging logic
+│   │   └── Video+Sound.swift   # Audio extraction logic
+│   ├── Flows/                   # UI screens and flows
+│   │   ├── DashboardContentView.swift  # Main app screen
+│   │   ├── BottomSheetView.swift      # Dynamic tool configuration sheet
+│   │   ├── GalleryAssetPickerView.swift # Photo library picker
+│   │   └── SettingsContentView.swift   # Settings screen
+│   ├── Helper/                  # Utilities and extensions
+│   ├── Lifecycle/              # App lifecycle management
+│   │   ├── ConvertlyApp.swift # Main app entry point
+│   │   └── AppDelegate.swift  # UIKit bridge for legacy features
+│   ├── SubView/                # Reusable UI components
+│   ├── Utils/                  # Utilities
+│   │   └── Analytics/         # Analytics system
+│   └── PurchaseKit.xcframework/ # In-app purchase framework
+│
+├── CommonSwiftUI/              # Shared SwiftUI components (Swift Package)
+│   └── Sources/CommonSwiftUI/
+│       ├── Extensions/        # SwiftUI & UIKit extensions
+│       ├── PropertyWrappers/  # Custom @AppStorage variants
+│       ├── ViewModifiers/     # Reusable view modifiers
+│       └── Views/            # Reusable views
+│
+├── SDKMockup/                 # Mock SDK for premium features (Swift Package)
+│   └── Sources/SDK/
+│       ├── TheSDK.swift      # Main SDK interface
+│       └── Views/            # SDK UI components
+│
+└── NotificationServiceExtension/ # Rich push notifications
+```
 
-## Replace AdMob IDs
+## Architecture
 
-1. Open the **Info.plist** file in Xcode. Look for ‘GADApplicationIdentifier’ and replace the existing value with your Google AdMob App ID.
-2. Open the **AppConfig.swift** file in Xcode. Look for ‘adMobAdID’ and replace the existing value with your Google AdMob Interstitial Ad ID.
+### MVVM Pattern
+The app follows MVVM architecture with SwiftUI's built-in data flow:
 
-## Change/Create In-App Purchase
+- **Models**: Video processing logic in DataManager extensions
+- **ViewModels**: `DataManager` serves as the main view model, using `@Published` properties
+- **Views**: SwiftUI views observe the view model through `@EnvironmentObject`
 
-### Step 1: Create your IAP product identifier
+### Key Components
 
-To create your IAP product identifier, you must have a valid Apple Developer account.
+#### 1. DataManager
+Central orchestrator for all app operations:
+- Manages video selection and processing
+- Handles file operations and history
+- Controls UI state (sheets, loading, etc.)
+- Implements `UIDocumentPickerDelegate` for file imports
 
-- Go to [App Store Connect](https://appstoreconnect.apple.com)
-- Select your app, then click ‘In-App Purchases’ from the Features section on the left side
-- On the ‘Create an In-App Purchase’ view, select the type as ‘Non-
-Consumable’ then for Reference Name you can type anything you
-want, and for the last step ‘Product ID’ you must type your unique In-
-App Purchase product identifier.
+#### 2. Video Processing Extensions
+Modular approach with focused extensions:
+- `Video+Sound.swift`: Audio extraction using `AVAssetReader/Writer`
+- `Video+GIF.swift`: Frame extraction and GIF generation
+- `Video+Merge.swift`: Video composition and merging
 
-It’s recommended that you use your bundle identifier plus some extra text at the
-end for example: com.yourBundleldentifier.premium
+#### 3. UI Flow
+- **DashboardContentView**: Main screen with tool selection
+- **BottomSheetView**: Dynamic configuration based on selected tool
+- **Share Sheet**: Automatic presentation after conversion
 
-### Step 2: Replace In-App Purchase Identifier
+### Data Flow
+1. User selects a tool → Updates `DataManager.videoToolType`
+2. User imports video → `DataManager.handleSelectedAsset()`
+3. Bottom sheet appears → User configures options
+4. Conversion starts → Progress shown via `LoadingView`
+5. Result saved → Share sheet presented
 
-Open the ‘AppConfig.swift’ file in Xcode. Look for
-‘premiumVersion’ and replace the existing value with your IAP product identifier that you created in step 1 above.
+## Key Features Implementation
 
-That’s all you have to do!
+### Video to Audio Conversion
+```swift
+// Located in Video+Sound.swift
+- Uses AVAssetReader to read video tracks
+- AVAssetWriter to write audio-only file
+- Supports M4A, WAV, and CAF formats
+- Configurable audio settings (22050Hz, mono)
+```
 
-### Troubleshooting In-App Purchases
+### Video to GIF Conversion
+```swift
+// Located in Video+GIF.swift
+- Extracts frames using AVAssetImageGenerator
+- Creates animated GIF with CGImageDestination
+- Configurable frame rate (5-15 FPS)
+- Maximum 5-second duration for performance
+```
 
-If the IAP price doesn’t show up in the app,
-or in the logs you get errors saying “Product no found”, then
-follow these steps to troubleshoot the issue:
+### Video Merging
+```swift
+// Located in Video+Merge.swift
+- Uses AVMutableComposition for combining videos
+- Handles different orientations and aspect ratios
+- Exports at 1280x720 resolution
+- Supports portrait/landscape output
+```
 
-1. Make sure you test on a real device only
+## Setup Instructions
 
-2. Your App Store Connect IAP product identifier must
-match the one inside AppConfig
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd ios-app-test
+   ```
 
-3. If your app is not on TestFlight, make sure to sign in with your
-Apple Sandbox ID. To create an Apple Sandbox ID, go to App
-Store Connect -> Users and Access and see the Sandbox Testers
-on the left side. Create a new Sandbox account here.
+2. **Open in Xcode**
+   ```bash
+   open VideoFlex.xcodeproj
+   ```
 
-4. Check all your contracts, agreements, tax and banking info in App
-Store Connect. All must be accepted.
+3. **Build and Run**
+   - Select a physical device or simulator (iOS 14.0+)
+   - Press Cmd+R to build and run
+   - **Note**: Physical device recommended for camera/photo library testing
 
-5. Check your in-app purchase product, the status must be
-Approved, or Ready to Submit. If your product shows “Missing
-Metadata” then you must fill out all the fields in App Store
-Connect for your IAP product.
+## Configuration
 
-Thank you for your business and feel free to [contact me](https://www.bradbooysen.com/contact) for all your app needs.
-Email: hey@bradbooysen.com
+### AppConfig.swift
+Central configuration file containing:
+- **AdMob IDs**: Ad integration settings
+- **IAP Product ID**: Premium version identifier
+- **Video Limits**: Max GIF duration, frame rates
+- **Email/URLs**: Support and privacy links
+
+### Monetization
+- **Ads**: Google AdMob integration (interstitial ads)
+- **Premium**: In-app purchase removes ads, unlocks all features
+- **Premium Features**: Video to GIF, Merge Videos
+
+## Adding New Features
+
+### To add a new video conversion tool:
+
+1. **Update VideoToolType enum** in `AppConfig.swift`
+   ```swift
+   enum VideoToolType {
+       case regular, videoGIF, mergeVideos, yourNewTool
+   }
+   ```
+
+2. **Create processing extension** in DataManager/
+   ```swift
+   // Video+YourFeature.swift
+   extension DataManager {
+       func processYourFeature(from video: AVAsset) {
+           // Implementation
+       }
+   }
+   ```
+
+3. **Add UI in DashboardContentView**
+   - Add button in `ImportMediaSectionView` or `OtherToolsView`
+   - Set appropriate `videoToolType` on tap
+
+4. **Configure BottomSheetView**
+   - Add case in switch statement for your tool
+   - Create configuration UI components
+
+5. **Update convertSelectedAsset()** in DataManager
+   - Add case to handle your new tool type
+
+### Code Style Guidelines
+- Use SwiftUI's declarative syntax
+- Follow MVVM pattern
+- Keep views focused and extract reusable components
+- Use `@Published` for UI-reactive properties
+- Implement proper error handling with user alerts
+
+## Testing Considerations
+
+- **Device Testing**: Always test video features on real devices
+- **Memory Management**: Monitor memory usage during video processing
+- **File Formats**: Test with various video formats (MOV, MP4, etc.)
+- **Permissions**: Ensure photo library and camera permissions work
+- **Share Extensions**: Verify share sheet functionality
+
+## Important Notes
+
+1. **Privacy First**: All processing happens on-device
+2. **Performance**: GIF conversion limited to 5 seconds for optimal performance
+3. **Resolution**: Merged videos output at 720p for balance of quality/size
+4. **Analytics**: Comprehensive event tracking for user actions
+5. **Localization**: Currently English-only
+
+## Common Tasks for Candidates
+
+Potential interview tasks might include:
+- Adding a new video filter/effect feature
+- Implementing video trimming functionality
+- Adding watermark to converted videos
+- Implementing batch processing
+- Adding cloud backup for converted files
+- Improving the UI/UX of existing features
+- Adding unit tests for video processing logic
+
+## Support & Resources
+
+- **Bundle ID**: Check Info.plist for current bundle identifier
+- **Minimum iOS**: 14.0 (consider compatibility when adding features)
+- **Swift Version**: 5.5+
+- **UI Framework**: SwiftUI only (no UIKit views except for system integrations)
+
+## Debugging Tips
+
+1. **Check Console**: Detailed logs for video processing
+2. **Memory Graph**: Monitor retain cycles in closures
+3. **Instruments**: Profile video processing performance
+4. **Test Various Inputs**: Different video sizes, formats, durations
+
+---
+
+**Good luck with your interview task! Remember to read through the existing code to understand patterns and maintain consistency.**
